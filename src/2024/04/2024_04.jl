@@ -43,35 +43,22 @@ begin
     function count_xmas(grid)
         nrows, ncols = size(grid)
         count = 0    
+        patterns = [
+            ('M', 'M', 'S', 'S'),
+            ('M', 'S', 'M', 'S'),
+            ('S', 'S', 'M', 'M'),
+            ('S', 'M', 'S', 'M')
+        ]
         for i in 2:(nrows-1)
             for j in 2:(ncols-1)
                 if grid[i, j] != 'A'
                     continue
                 end
-                # M.S
-                # .A.
-                # M.S
-                if (grid[i-1, j-1] == 'M') && (grid[i-1, j+1] == 'M') && (grid[i+1, j-1] == 'S') && (grid[i+1, j+1] == 'S')
-                    count += 1
-                    # println("(i,j) = ($i,$j) v1")
-                # M.M
-                # .A.
-                # S.S
-                elseif (grid[i-1, j-1] == 'M') && (grid[i-1, j+1] == 'S') && (grid[i+1, j-1] == 'M') && (grid[i+1, j+1] == 'S')
-                    count += 1
-                    # println("(i,j) = ($i,$j) v2")
-                # S.M
-                # .A.
-                # S.M
-                elseif (grid[i-1, j-1] == 'S') && (grid[i-1, j+1] == 'S') && (grid[i+1, j-1] == 'M') && (grid[i+1, j+1] == 'M')
-                    count += 1
-                    # println("(i,j) = ($i,$j) v3")
-                # S.S
-                # .A.
-                # M.M
-                elseif (grid[i-1, j-1] == 'S') && (grid[i-1, j+1] == 'M') && (grid[i+1, j-1] == 'S') && (grid[i+1, j+1] == 'M')
-                    count += 1
-                    # println("(i,j) = ($i,$j) v4")
+                for (a, b, c, d) in patterns
+                    if (grid[i-1, j-1] == a) && (grid[i-1, j+1] == b) && (grid[i+1, j-1] == c) && (grid[i+1, j+1] == d)
+                        count += 1
+                        break
+                    end
                 end
             end
         end
