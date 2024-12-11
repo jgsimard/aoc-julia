@@ -4,7 +4,7 @@ begin
 
     function read_to_2d_array(file_path)
         lines = readlines(file_path)
-        return [lines[i][j] for i in 1:length(lines), j in 1:length(lines[1])]
+        return [lines[i][j] for i = 1:length(lines), j = 1:length(lines[1])]
     end
 
     function count_word_occurrences(grid, word)
@@ -18,17 +18,17 @@ begin
             (1, 1),  # down-right
             (-1, -1),# up-left
             (1, -1), # down-left
-            (-1, 1)  # up-right
+            (-1, 1),  # up-right
         ]
-        count = 0    
-        for i in 1:nrows
-            for j in 1:ncols
+        count = 0
+        for i = 1:nrows
+            for j = 1:ncols
                 for (di, dj) in directions
                     match = true
-                    for k in 0:(word_length - 1)
+                    for k = 0:(word_length-1)
                         ii = i + k * di
                         jj = j + k * dj
-                        if !(ii in  1:nrows) || !(jj in  1:ncols) || grid[ii, jj] != word[k + 1]
+                        if !(ii in 1:nrows) || !(jj in 1:ncols) || grid[ii, jj] != word[k+1]
                             match = false
                             break
                         end
@@ -42,20 +42,23 @@ begin
 
     function count_xmas(grid)
         nrows, ncols = size(grid)
-        count = 0    
+        count = 0
         patterns = [
             ('M', 'M', 'S', 'S'),
             ('M', 'S', 'M', 'S'),
             ('S', 'S', 'M', 'M'),
-            ('S', 'M', 'S', 'M')
+            ('S', 'M', 'S', 'M'),
         ]
-        for i in 2:(nrows-1)
-            for j in 2:(ncols-1)
+        for i = 2:(nrows-1)
+            for j = 2:(ncols-1)
                 if grid[i, j] != 'A'
                     continue
                 end
                 for (a, b, c, d) in patterns
-                    if (grid[i-1, j-1] == a) && (grid[i-1, j+1] == b) && (grid[i+1, j-1] == c) && (grid[i+1, j+1] == d)
+                    if (grid[i-1, j-1] == a) &&
+                       (grid[i-1, j+1] == b) &&
+                       (grid[i+1, j-1] == c) &&
+                       (grid[i+1, j+1] == d)
                         count += 1
                         break
                     end
@@ -64,7 +67,7 @@ begin
         end
         return count
     end
-    
+
     file_path = "src\\2024\\04\\input.txt"
     word = "XMAS"
     grid = read_to_2d_array(file_path)
@@ -75,7 +78,7 @@ begin
 
     function pretty_print(array::Matrix{Char})
         for row in eachrow(array)
-            println(join(row, " ")) 
+            println(join(row, " "))
         end
     end
     # pretty_print(grid)

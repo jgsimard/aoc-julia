@@ -12,10 +12,10 @@ begin
         if is_safe(v)
             return true
         end
-        for i in 1:length(v)
+        for i = 1:length(v)
             if is_safe(vcat(v[1:i-1], v[i+1:end]))
                 return true
-            end 
+            end
         end
         return false
     end

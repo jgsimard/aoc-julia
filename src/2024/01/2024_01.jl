@@ -13,7 +13,7 @@ begin
         end
     end
 
-    res1 = sum(abs(x-y) for (x, y) in zip(sort(list1), sort(list2)))
+    res1 = sum(abs(x - y) for (x, y) in zip(sort(list1), sort(list2)))
     d = countmap(list2)
     score = sum(e * get(d, e, 0) for e in list1)
 

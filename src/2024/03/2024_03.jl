@@ -15,12 +15,12 @@ begin
     println("res1=$(res1)")
 
     function p2(data)
-        pattern  = r"do\(\)|don't\(\)|mul\((\d{1,3}),(\d{1,3})\)"
+        pattern = r"do\(\)|don't\(\)|mul\((\d{1,3}),(\d{1,3})\)"
         do_mul = true
         res = 0
         for m in eachmatch(pattern, data)
             if m.match == "do()"
-                do_mul=true
+                do_mul = true
             elseif m.match == "don't()"
                 do_mul = false
             elseif do_mul == true
