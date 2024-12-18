@@ -1,7 +1,4 @@
 begin
-    using StatsBase
-    using BenchmarkTools
-
     file_path = "src\\2024\\03\\input.txt"
     data = read(file_path, String)
 end
@@ -11,7 +8,7 @@ begin
         pattern = r"mul\((\d{1,3}),(\d{1,3})\)"
         return sum(prod(parse.(Int32, m)) for m in eachmatch(pattern, data))
     end
-    @btime res1 = p1(data)
+    res1 = p1(data)
     println("res1=$(res1)")
 
     function p2(data)
@@ -30,6 +27,6 @@ begin
         return res
     end
 
-    @btime res2 = p2(data)
+    res2 = p2(data)
     println("res2=$(res2)")
 end

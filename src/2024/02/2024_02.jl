@@ -1,6 +1,4 @@
 begin
-    using StatsBase
-    using BenchmarkTools
     file_path = "src\\2024\\02\\input.txt"
 
     function is_safe(v)

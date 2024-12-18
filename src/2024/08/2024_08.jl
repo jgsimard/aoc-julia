@@ -1,4 +1,3 @@
-using BenchmarkTools
 using IterTools
 
 base_path = joinpath("src", "2024", "08")
@@ -10,7 +9,7 @@ function parse_grid(filename)
     lines = readlines(filename)
     permutedims(hcat([collect(line) for line in lines]...))
 end
-    
+
 function get_antenna_positions(grid)
     positions = Dict{Char, Vector{Tuple{Int, Int}}}()
     nrows, ncols = size(grid)

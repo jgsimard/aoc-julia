@@ -1,7 +1,4 @@
 begin
-    using StatsBase
-    using BenchmarkTools
-
     function read_to_2d_array(file_path)
         lines = readlines(file_path)
         return [lines[i][j] for i = 1:length(lines), j = 1:length(lines[1])]

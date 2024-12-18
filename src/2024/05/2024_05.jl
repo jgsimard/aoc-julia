@@ -1,6 +1,3 @@
-using StatsBase
-using BenchmarkTools
-
 function parse_data(data)
     rules_data, updates_data = split(data, "\n\n")
     rules = [parse.(Int, split(line, "|")) for line in split(rules_data, "\n")]

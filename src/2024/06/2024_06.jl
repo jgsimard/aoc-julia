@@ -1,6 +1,3 @@
-using StatsBase
-using BenchmarkTools
-
 function orientation_from_char(ch::Char)::Int
     # '^' -> 0, '>' -> 1, 'v' -> 2, '<' -> 3
     return ch == '^' ? 0 :

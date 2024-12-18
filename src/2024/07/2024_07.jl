@@ -1,5 +1,3 @@
-using BenchmarkTools
-
 # part 1
 function prob1(filename)
     lines = readlines(filename)
