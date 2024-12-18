@@ -11,10 +11,10 @@ function parse_grid(filename)
 end
 
 function get_antenna_positions(grid)
-    positions = Dict{Char, Vector{Tuple{Int, Int}}}()
+    positions = Dict{Char,Vector{Tuple{Int,Int}}}()
     nrows, ncols = size(grid)
-    for row in 1:nrows
-        for col in 1:ncols
+    for row = 1:nrows
+        for col = 1:ncols
             char = grid[row, col]
             if char != '.'
                 push!(get!(positions, char, []), (row, col))
@@ -27,18 +27,18 @@ end
 function prob1(filename)
     grid = parse_grid(filename)
     nrows, ncols = size(grid)
-    
+
     antena_positions = get_antenna_positions(grid)
 
-    antinode_positions = Set{Tuple{Int, Int}}()
+    antinode_positions = Set{Tuple{Int,Int}}()
     # println(antena_positions)
     for (antena, antena_pos) in antena_positions
         for pair in IterTools.subsets(antena_pos, 2)
-            delta = (pair[2] .- pair[1]) 
+            delta = (pair[2] .- pair[1])
             maybe_antinodes = [pair[1] .- delta, pair[2] .+ delta]
             for ma in maybe_antinodes
                 # println(ma)
-                if  (ma[1] in 1:nrows) && (ma[2] in 1:ncols) 
+                if (ma[1] in 1:nrows) && (ma[2] in 1:ncols)
                     push!(antinode_positions, ma)
                 end
             end
@@ -53,16 +53,16 @@ end
 function prob2(filename)
     grid = parse_grid(filename)
     nrows, ncols = size(grid)
-    
+
     antena_positions = get_antenna_positions(grid)
 
-    antinode_positions = Set{Tuple{Int, Int}}()
+    antinode_positions = Set{Tuple{Int,Int}}()
     for (antena, antena_pos) in antena_positions
         for pair in IterTools.subsets(antena_pos, 2)
-            delta = (pair[2] .- pair[1]) 
-            for i in -100:100 # super hacky but it works
-                maybe_antinode = pair[1] .-  i .* delta
-                if  (maybe_antinode[1] in 1:nrows) && (maybe_antinode[2] in 1:ncols) 
+            delta = (pair[2] .- pair[1])
+            for i = -100:100 # super hacky but it works
+                maybe_antinode = pair[1] .- i .* delta
+                if (maybe_antinode[1] in 1:nrows) && (maybe_antinode[2] in 1:ncols)
                     push!(antinode_positions, maybe_antinode)
                 end
             end
